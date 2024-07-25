@@ -45,7 +45,7 @@ def change_book_status(book_id, new_status):
         try:
             books = json.load(file)
             if book_id not in [b["id"] for b in books]:
-                print("Такой книги нет.")
+                print("Такои книги нет.")
                 return
             for book in books:
                 if book["id"] == book_id:
@@ -120,7 +120,7 @@ if __name__ == "__main__":
                             except json.decoder.JSONDecodeError:
                                 print("Библиотека пуста.")
             case "4":
-                del_id = input("Введите номер книги: ")
+                del_id = int(input("Введите номер книги: "))
                 with open("library.json", "r", encoding="cp1251") as file:
                     try:
                         books = json.load(file)
@@ -132,8 +132,12 @@ if __name__ == "__main__":
                 with open("library.json", "w", encoding="cp1251") as file:
                     json.dump(filtred_books, file, ensure_ascii=False, indent=4)
             case "5":
-                book_id = input("Введите номер книги: ")
-                new_status = input("Новый статус: ")
+                book_id = int(input("Введите номер книги: "))
+                new_status = input("Новыи статус: ")
+                if new_status not in ["В наличии", "Выданна"]:
+                    print("Недопустимыи статус.")
+                    break
+
                 change_book_status(book_id, new_status)
             case "6":
                 exit()
